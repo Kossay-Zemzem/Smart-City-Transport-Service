@@ -11,10 +11,11 @@ import lombok.*;
 @ToString
 public class LigneDeTransport {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+    private String codeLigne;
     @ManyToOne
     private Terminus terminusDepart;
-
     @ManyToOne
     private Terminus terminusArrivee;
 }

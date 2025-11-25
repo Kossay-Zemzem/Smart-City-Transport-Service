@@ -1,9 +1,6 @@
 package com.smartcity.transport.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalTime;
@@ -15,7 +12,10 @@ import java.time.LocalTime;
 @ToString
 public class Trajet {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+    private String codeTrajet;
+
     //TODO Time axis will be handled later
 //    private LocalTime heureDepart;
 //    private LocalTime heureArrivee;

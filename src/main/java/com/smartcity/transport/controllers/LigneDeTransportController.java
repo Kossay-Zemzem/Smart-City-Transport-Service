@@ -20,9 +20,9 @@ public class LigneDeTransportController {
         this.ligneDeTransportRepo=ligneDeTransportRepo;
     }
 
-    @GetMapping
-    public List<LigneDeTransport> getLignesDeTransport(){
-        return ligneDeTransportRepo.findAll();
-    }
+//    @GetMapping
+//    public List<LigneDeTransport> getLignesDeTransport(){
+//        return ligneDeTransportRepo.findAll();
+//    }
 
 }

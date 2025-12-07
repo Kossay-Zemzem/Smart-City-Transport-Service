@@ -3,14 +3,14 @@ package com.smartcity.transport.controllers;
 
 import com.smartcity.transport.models.LigneDeTransport;
 import com.smartcity.transport.models.Terminus;
+import com.smartcity.transport.models.Trajet;
 import com.smartcity.transport.repository.LigneDeTransportRepository;
 import com.smartcity.transport.services.LigneService;
+import com.smartcity.transport.services.TrajetService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +19,11 @@ import java.util.List;
 public class LigneDeTransportController {
 
     private final LigneService ligneDeTransportServ;
+    private final TrajetService trajetService;
 
     @Autowired
-    public LigneDeTransportController(LigneService ligneDeTransportServ){
+    public LigneDeTransportController(LigneService ligneDeTransportServ, TrajetService trajetService) {
+        this.trajetService = trajetService;
         this.ligneDeTransportServ =ligneDeTransportServ;
     }
 
@@ -37,6 +39,12 @@ public class LigneDeTransportController {
             return ResponseEntity.ok().build() ;
         else
             return ResponseEntity.ok(lignesList);
+    }
+
+    // TODO , replace Trajet with a DTO to not show the trajet , maybe
+    @GetMapping("/{codeLigne}/trajets")
+    public List<Trajet> getTrajetsDuLigneDeTransport(@PathVariable String codeLigne){
+        return trajetService.getAllTrajetsDuLigne(codeLigne);
     }
 
 }

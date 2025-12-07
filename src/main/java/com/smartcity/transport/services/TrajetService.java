@@ -1,5 +1,6 @@
 package com.smartcity.transport.services;
 
+import com.smartcity.transport.models.LigneDeTransport;
 import com.smartcity.transport.models.Trajet;
 import com.smartcity.transport.repository.TrajetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import java.util.List;
 public class TrajetService {
 
     private final TrajetRepository trajetRepo;
+    private final LigneService ligneService ;
 
     @Autowired
-    public TrajetService(TrajetRepository trajetRepo) {
+    public TrajetService(TrajetRepository trajetRepo,LigneService ligneService ) {
+        this.ligneService =ligneService ;
         this.trajetRepo = trajetRepo;
     }
 
@@ -23,6 +26,17 @@ public class TrajetService {
 
     public List<Trajet> findTrajetByCode(String codeTrajet) {
         return trajetRepo.findAllByCodeTrajet(codeTrajet);
+    }
+
+    public List<Trajet> getAllTrajetsDuLigne(String codeLigne) {
+        LigneDeTransport ligne = ligneService.findLigneTransportByCode(codeLigne).stream().findFirst().orElse(null);
+        if (ligne != null) {
+            return trajetRepo.findAllByLigneDeTransport(ligne);
+        }else
+        {
+            return List.of();
+        }
+
     }
 }
 

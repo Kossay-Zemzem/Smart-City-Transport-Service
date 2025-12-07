@@ -1,5 +1,6 @@
 package com.smartcity.transport.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public abstract class Transport {
     @Enumerated(EnumType.STRING)
     private StatutTransport statut;
 //    Date dateMiseEnService;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "moyenDeTransport" )
     private Set<Trajet> trajets = new HashSet<>();
 }

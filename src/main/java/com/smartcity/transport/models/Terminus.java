@@ -1,28 +1,28 @@
 package com.smartcity.transport.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Terminus {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
     private String nom;
     private String adresse;
 
-    @OneToMany(mappedBy = "terminusDepart")
+    @JsonIgnore
+    @OneToMany(mappedBy = "terminusDepart",fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<LigneDeTransport> lignesDepart;
-
-    @OneToMany(mappedBy = "terminusArrivee")
+    @JsonIgnore
+    @OneToMany(mappedBy = "terminusArrivee",fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<LigneDeTransport> lignesArrivee;
 }

@@ -1,7 +1,10 @@
 package com.smartcity.transport.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -18,4 +21,8 @@ public class LigneDeTransport {
     private Terminus terminusDepart;
     @ManyToOne
     private Terminus terminusArrivee;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "ligneDeTransport")
+    private Set<Trajet> trajets;
 }

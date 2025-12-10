@@ -4,6 +4,7 @@ package com.smartcity.transport.controllers;
 import com.smartcity.transport.models.LigneDeTransport;
 import com.smartcity.transport.models.Terminus;
 import com.smartcity.transport.models.Trajet;
+import com.smartcity.transport.models.TrajetDTO;
 import com.smartcity.transport.repository.LigneDeTransportRepository;
 import com.smartcity.transport.services.LigneService;
 import com.smartcity.transport.services.TrajetService;
@@ -43,7 +44,7 @@ public class LigneDeTransportController {
 
     // TODO , replace Trajet with a DTO to not show the trajet , maybe
     @GetMapping("/{codeLigne}/trajets")
-    public List<Trajet> getTrajetsDuLigneDeTransport(@PathVariable String codeLigne){
+    public List<TrajetDTO> getTrajetsDuLigneDeTransport(@PathVariable String codeLigne){
         return trajetService.getAllTrajetsDuLigne(codeLigne);
     }
 

@@ -73,6 +73,20 @@ public class DataInit {
             trajet1.setLigneDeTransport(ligne1);
             trajet1.setMoyenDeTransport(bus1);
             trajetRepository.save(trajet1);
+
+            Trajet trajet2 = new Trajet();
+            trajet2.setCodeTrajet("TRJ1002");
+            //set horaire when it's added
+            trajet2.setLigneDeTransport(ligne2);
+            trajet2.setMoyenDeTransport(train1);
+            trajetRepository.save(trajet2);
+
+            Trajet trajet3 = new Trajet();
+            trajet3.setCodeTrajet("TRJ1003");
+            //set horaire when it's added
+            trajet3.setLigneDeTransport(ligne1);
+            trajet3.setMoyenDeTransport(train1);
+            trajetRepository.save(trajet3);
         };
     }
 }
